@@ -1,0 +1,158 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Star",
+        "version": "1.0.0",
+        "description": "create an sample application"
+    },
+    "paths": {
+        "/samples": {
+            "summary": "Path used to manage the list of samples.",
+            "description": "The REST endpoint/path used to list and create zero or more `sample` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/sample"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `sample` entities."
+                    }
+                },
+                "operationId": "getsamples",
+                "summary": "List All samples",
+                "description": "Gets a list of all `sample` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `sample` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sample"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createsample",
+                "summary": "Create a sample",
+                "description": "Creates a new instance of a `sample`."
+            }
+        },
+        "/samples/{sampleId}": {
+            "summary": "Path used to manage a single sample.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `sample`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sample"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `sample`."
+                    }
+                },
+                "operationId": "getsample",
+                "summary": "Get a sample",
+                "description": "Gets the details of a single instance of a `sample`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `sample` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sample"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updatesample",
+                "summary": "Update a sample",
+                "description": "Updates an existing `sample`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deletesample",
+                "summary": "Delete a sample",
+                "description": "Deletes an existing `sample`."
+            },
+            "parameters": [
+                {
+                    "name": "sampleId",
+                    "description": "A unique identifier for a `sample`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "sample": {
+                "title": "Root Type for sample",
+                "description": "challenge",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "creationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "lastChanged": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "inCharge": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 2,
+                    "subject": "Installing Maven",
+                    "creationDate": "2020-10-07T02:57:10Z",
+                    "status": "Success",
+                    "lastChanged": "2020-10-07T02:57:10Z",
+                    "inCharge": "IT-Team"
+                }
+            }
+        }
+    }
+}

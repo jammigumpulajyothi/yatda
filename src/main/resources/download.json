@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "yatada",
+        "version": "1.0.0",
+        "description": "yet to do an applications"
+    },
+    "paths": {
+        "/demos": {
+            "summary": "Path used to manage the list of demos.",
+            "description": "The REST endpoint/path used to list and create zero or more `demo` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/demo"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `demo` entities."
+                    }
+                },
+                "operationId": "getdemos",
+                "summary": "List All demos",
+                "description": "Gets a list of all `demo` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `demo` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/demo"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createdemo",
+                "summary": "Create a demo",
+                "description": "Creates a new instance of a `demo`."
+            }
+        },
+        "/demos/{demoId}": {
+            "summary": "Path used to manage a single demo.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `demo`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/demo"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `demo`."
+                    }
+                },
+                "operationId": "getdemo",
+                "summary": "Get a demo",
+                "description": "Gets the details of a single instance of a `demo`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `demo` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/demo"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updatedemo",
+                "summary": "Update a demo",
+                "description": "Updates an existing `demo`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deletedemo",
+                "summary": "Delete a demo",
+                "description": "Deletes an existing `demo`."
+            },
+            "parameters": [
+                {
+                    "name": "demoId",
+                    "description": "A unique identifier for a `demo`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "demo": {
+                "title": "Root Type for demo",
+                "description": "sample application",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "creationDate": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "lastChanged": {
+                        "type": "string"
+                    },
+                    "inCharge": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 2,
+                    "subject": "Java",
+                    "creationDate": "10-05-2018T02:03:48Z",
+                    "status": "Success",
+                    "lastChanged": "26-07-2020T04:04:28Z",
+                    "inCharge": "IT-Team"
+                }
+            }
+        }
+    }
+}
